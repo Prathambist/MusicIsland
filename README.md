@@ -1,12 +1,12 @@
-# 🏝️ MusicIsland
+# MusicIsland
 
-A sleek, fluid **iPhone-style Dynamic Island** music widget for Windows, designed for Spotify and media playback.
+A sleek, fluid **Dynamic Island** music widget for Windows, designed for Spotify and media playback.
 
-It floats at the top-center of your screen as a pill-shaped capsule displaying animated equalizer waves and album art. Hovering over it fluidly morphs the island into an expanded iOS Now Playing card with playback controls, marquee track scrolling, and dynamic color theming.
+It floats at the top-center of your screen as a pill-shaped capsule displaying animated equalizer waves and album art. Hovering over it fluidly morphs the island into an expanded Now Playing card with playback controls, marquee track scrolling, and dynamic color theming.
 
 ---
 
-## ⚡ Quick Install (PowerShell)
+## Quick Install (PowerShell)
 
 Open Windows PowerShell and run:
 
@@ -18,7 +18,7 @@ irm https://raw.githubusercontent.com/Prathambist/MusicIsland/main/install.ps1 |
 
 ---
 
-## 🗑️ Quick Uninstall
+## Quick Uninstall
 
 To completely remove MusicIsland and all its shortcuts, run:
 
@@ -28,9 +28,9 @@ irm https://raw.githubusercontent.com/Prathambist/MusicIsland/main/uninstall.ps1
 
 ---
 
-## ✨ Features
+## Features
 
-- **Apple Dynamic Island Aesthetics:** Detached floating capsule with OLED black background, 1px perimeter outline, and soft ambient drop shadow.
+- **Dynamic Island Aesthetics:** Detached floating capsule with OLED black background, 1px perimeter outline, and soft ambient drop shadow.
 - **Fluid Morphing:** Smoothly animates between compact pill and expanded squircle card on hover.
 - **Adaptive Color Theming:** Dynamically samples colors from current album artwork to tint buttons, gradients, outlines, and audio visualizer bars.
 - **Media Controls:** Full control over Spotify playback (Previous, Play/Pause, Next).
@@ -39,7 +39,7 @@ irm https://raw.githubusercontent.com/Prathambist/MusicIsland/main/uninstall.ps1
 
 ---
 
-## 🛠️ Building from Source
+## Building from Source
 
 Prerequisites: [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (Windows 10/11)
 
@@ -54,9 +54,3 @@ dotnet run
 # Build a self-contained release package
 dotnet publish -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -o ./publish
 ```
-
----
-
-## 📄 License
-
-MIT License. See [LICENSE](LICENSE) for details.
