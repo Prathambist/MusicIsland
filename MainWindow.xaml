@@ -1,0 +1,334 @@
+<Window x:Class="MusicIsland.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MusicIsland"
+        Width="450"
+        Height="175"
+        Left="0"
+        Top="0"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="{x:Null}"
+        Topmost="True"
+        ShowInTaskbar="False">
+
+    <Window.Resources>
+        <Style x:Key="MusicButton"
+               TargetType="Button">
+            <Setter Property="Foreground"
+                    Value="White"/>
+            <Setter Property="Background"
+                    Value="#25242E"/>
+            <Setter Property="BorderThickness"
+                    Value="0"/>
+            <Setter Property="Width"
+                    Value="34"/>
+            <Setter Property="Height"
+                    Value="34"/>
+            <Setter Property="FontSize"
+                    Value="13"/>
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="BtnBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="17">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="BtnBorder" Property="Opacity" Value="0.8"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="BtnBorder" Property="Opacity" Value="0.6"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <!-- Hover detection area bridging the screen top to the floating island -->
+        <Grid x:Name="IslandHitArea"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Top"
+              Background="Transparent"
+              MouseEnter="Island_MouseEnter"
+              MouseLeave="Island_MouseLeave">
+
+            <!-- Floating Dynamic Island with OLED border and soft ambient shadow -->
+            <Border x:Name="IslandContainer"
+                    Margin="0,11,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    CornerRadius="19"
+                    Background="#050508"
+                    BorderBrush="#25252A"
+                    BorderThickness="1">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="22"
+                                      ShadowDepth="4"
+                                      Direction="270"
+                                      Color="#000000"
+                                      Opacity="0.55"/>
+                </Border.Effect>
+
+                <!-- Island Content with smooth pill / squircle clipping -->
+                <Border x:Name="Island"
+                        Width="230"
+                        Height="38"
+                        CornerRadius="19"
+                        Background="#050508"
+                        ClipToBounds="True"
+                        SizeChanged="Island_SizeChanged">
+
+                    <Grid>
+                        <!-- Compact Dynamic Island pill content -->
+                        <Grid x:Name="CompactContent"
+                              Margin="8,0,12,0"
+                              VerticalAlignment="Center">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left: Mini Album Art -->
+                            <Border Width="26"
+                                    Height="26"
+                                    CornerRadius="7"
+                                    Background="#18181E"
+                                    BorderBrush="#33FFFFFF"
+                                    BorderThickness="0.8"
+                                    ClipToBounds="True"
+                                    VerticalAlignment="Center"
+                                    HorizontalAlignment="Left">
+                                <Grid>
+                                    <TextBlock Text="♪"
+                                               Foreground="#44FFFFFF"
+                                               FontSize="12"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+                                    <Image x:Name="CompactAlbumArt"
+                                           Stretch="UniformToFill"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Middle: Clean Spacer (Signature Dynamic Island Look) -->
+                            <Grid Grid.Column="1"/>
+
+                            <!-- Right: Animated Sound Wave Equalizer Bars -->
+                            <StackPanel Grid.Column="2"
+                                        Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Height="22">
+
+                                <Rectangle x:Name="Bar1"
+                                           Width="3"
+                                           Height="7"
+                                           RadiusX="1.5"
+                                           RadiusY="1.5"
+                                           Fill="#D8C8FF"
+                                           VerticalAlignment="Center"
+                                           Margin="1.5,0"/>
+
+                                <Rectangle x:Name="Bar2"
+                                           Width="3"
+                                           Height="14"
+                                           RadiusX="1.5"
+                                           RadiusY="1.5"
+                                           Fill="#D8C8FF"
+                                           VerticalAlignment="Center"
+                                           Margin="1.5,0"/>
+
+                                <Rectangle x:Name="Bar3"
+                                           Width="3"
+                                           Height="10"
+                                           RadiusX="1.5"
+                                           RadiusY="1.5"
+                                           Fill="#D8C8FF"
+                                           VerticalAlignment="Center"
+                                           Margin="1.5,0"/>
+
+                                <Rectangle x:Name="Bar4"
+                                           Width="3"
+                                           Height="17"
+                                           RadiusX="1.5"
+                                           RadiusY="1.5"
+                                           Fill="#D8C8FF"
+                                           VerticalAlignment="Center"
+                                           Margin="1.5,0"/>
+
+                                <Rectangle x:Name="Bar5"
+                                           Width="3"
+                                           Height="9"
+                                           RadiusX="1.5"
+                                           RadiusY="1.5"
+                                           Fill="#D8C8FF"
+                                           VerticalAlignment="Center"
+                                           Margin="1.5,0"/>
+
+                                <Rectangle x:Name="Bar6"
+                                           Width="3"
+                                           Height="15"
+                                           RadiusX="1.5"
+                                           RadiusY="1.5"
+                                           Fill="#D8C8FF"
+                                           VerticalAlignment="Center"
+                                           Margin="1.5,0"/>
+
+                                <Rectangle x:Name="Bar7"
+                                           Width="3"
+                                           Height="6"
+                                           RadiusX="1.5"
+                                           RadiusY="1.5"
+                                           Fill="#D8C8FF"
+                                           VerticalAlignment="Center"
+                                           Margin="1.5,0"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- Expanded album-art theme -->
+                        <Grid x:Name="ExpandedContent"
+                              Visibility="Hidden"
+                              Opacity="0">
+
+                            <Image x:Name="ExpandedAlbumBackground"
+                                   Stretch="UniformToFill"
+                                   HorizontalAlignment="Stretch"
+                                   VerticalAlignment="Stretch"/>
+
+                            <Border x:Name="ExpandedTintOverlay">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0"
+                                                         EndPoint="1,1">
+                                        <GradientStop Color="#E6000000"
+                                                      Offset="0"/>
+                                        <GradientStop Color="#B8000000"
+                                                      Offset="0.55"/>
+                                        <GradientStop Color="#F0000000"
+                                                      Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                            </Border>
+
+                            <Border x:Name="AccentOutline"
+                                    BorderThickness="1"
+                                    BorderBrush="#66D8C8FF"
+                                    CornerRadius="28"
+                                    IsHitTestVisible="False"/>
+
+                            <Grid Margin="18,14,18,14">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <DockPanel LastChildFill="False">
+                                    <TextBlock Text="NOW PLAYING"
+                                               Foreground="#88FFFFFF"
+                                               FontSize="9"
+                                               FontWeight="Bold"/>
+                                    <TextBlock Text="SPOTIFY"
+                                               DockPanel.Dock="Right"
+                                               Foreground="#55FFFFFF"
+                                               FontSize="8.5"
+                                               FontWeight="SemiBold"/>
+                                </DockPanel>
+
+                                <Grid Grid.Row="1"
+                                      Margin="0,8,0,0">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="54"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border Width="52"
+                                            Height="52"
+                                            CornerRadius="10"
+                                            Background="#25242C"
+                                            BorderBrush="#33FFFFFF"
+                                            BorderThickness="1"
+                                            ClipToBounds="True">
+                                        <Grid>
+                                            <TextBlock Text="♪"
+                                                       Foreground="#44FFFFFF"
+                                                       FontSize="20"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"/>
+                                            <Image x:Name="AlbumArt"
+                                                   Stretch="UniformToFill"/>
+                                        </Grid>
+                                    </Border>
+
+                                    <StackPanel Grid.Column="1"
+                                                VerticalAlignment="Center"
+                                                Margin="12,0,10,0">
+
+                                        <Border x:Name="TitleClip"
+                                                ClipToBounds="True"
+                                                HorizontalAlignment="Stretch">
+                                            <TextBlock x:Name="TrackTitle"
+                                                       Text="Waiting for Spotify"
+                                                       Foreground="White"
+                                                       FontSize="13.5"
+                                                       FontWeight="Bold"
+                                                       TextWrapping="NoWrap"
+                                                       Cursor="Hand"
+                                                       MouseLeftButtonUp="TrackTitle_Click"
+                                                       ToolTip="Open album in Spotify">
+                                                <TextBlock.RenderTransform>
+                                                    <TranslateTransform x:Name="TitleTransform"/>
+                                                </TextBlock.RenderTransform>
+                                            </TextBlock>
+                                        </Border>
+
+                                        <TextBlock x:Name="TrackArtist"
+                                                   Text="Play something in Spotify"
+                                                   Foreground="#CCFFFFFF"
+                                                   FontSize="11"
+                                                   FontWeight="Medium"
+                                                   Margin="0,4,0,0"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   Cursor="Hand"
+                                                   MouseLeftButtonUp="TrackArtist_Click"
+                                                   ToolTip="Open artist in Spotify"/>
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="2"
+                                                Orientation="Horizontal"
+                                                VerticalAlignment="Center">
+
+                                        <Button Content="|◀"
+                                                Click="Previous_Click"
+                                                Style="{StaticResource MusicButton}"/>
+
+                                        <Button x:Name="PlayPauseButton"
+                                                Content="▶"
+                                                Click="PlayPause_Click"
+                                                Style="{StaticResource MusicButton}"
+                                                Margin="6,0"/>
+
+                                        <Button Content="▶|"
+                                                Click="Next_Click"
+                                                Style="{StaticResource MusicButton}"/>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Border>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
