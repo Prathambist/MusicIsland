@@ -1,10 +1,31 @@
-﻿
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <!-- Overridden from the git tag by the release workflow; used by the updater -->
+    <Version>1.1.0</Version>
+    <!-- WinForms is used only for the system tray icon -->
+    <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Avoid WPF / WinForms type name clashes (Button, Application, Color, ...) -->
+    <Using Remove="System.Windows.Forms" />
+    <Using Remove="System.Drawing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The test project lives in a subfolder; keep its files out of the app -->
+    <Compile Remove="MusicIsland.Tests/**" />
+    <None Remove="MusicIsland.Tests/**" />
+    <Page Remove="MusicIsland.Tests/**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NAudio.Wasapi" Version="2.2.1" />
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
+  </ItemGroup>
 </Project>
